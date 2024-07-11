@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: gRPC-core
+grpc:
+  server:
+    port: 6565
