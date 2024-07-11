@@ -2,8 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.1'
     id 'io.spring.dependency-management' version '1.1.5'
-//    id "io.github.lognet.grpc-spring-boot" version '5.1.5'
-    id "com.google.protobuf" version "0.9.4"
+    id "com.google.protobuf" version "0.9.4" //used to generate java classes from .proto files
 }
 
 group = 'com.gini'
@@ -27,10 +26,10 @@ repositories {
 
 dependencies {
 
-    implementation 'net.devh:grpc-spring-boot-starter:3.1.0.RELEASE'
-    implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
+    implementation 'net.devh:grpc-spring-boot-starter:3.1.0.RELEASE'         //gRPC dependency
+    implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE' //server dependency
+    implementation 'com.google.protobuf:protobuf-java:4.27.2'
 
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -39,4 +38,60 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// how to create this: https://www.youtube.com/watch?v=nB7J6D_IXrA&t=339s
+// how to create this: https://github.com/google/protobuf-gradle-plugin
+sourceSets {
+    main {
+        proto { //--------->>>>> from where to take the .proto files
+            // In addition to the default 'src/main/proto'
+            srcDir 'src/main/resources/proto'
+            // In addition to the default '**/*.proto' (use with caution).
+            // Using an extension other than 'proto' is NOT recommended,
+            // because when proto files are published along with class files, we can
+            // only tell the type of a file from its extension.
+            include '**/*.protodevel'
+        }
+        java {  //---------->>>>> where to generate the java files from .proto files
+            srcDir 'build/generated/source/proto/main/grpc'
+            srcDir 'build/generated/source/proto/main/java'
+        }
+    }
+//    test {
+//        proto {
+//            // In addition to the default 'src/test/proto'
+//            srcDir 'src/test/protocolbuffers'
+//        }
+//    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:4.27.2'
+    }
+
+    plugins {
+        // Locate a plugin with name 'grpc'. This step is optional.
+        // If you leave it empty, it uses the current directory.
+        // If you don't specify it, protoc will try to use "protoc-gen-grpc" from
+        // system search path.
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.65.0'
+            // or
+            // path = 'tools/protoc-gen-grpc-java'
+        }
+    }
+
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+// it will throw and error because it can't find the main class when generating proto files
+// to fix it use this -> https://stackoverflow.com/questions/56861256/gradle-build-failed-main-class-name-has-not-been-configured-and-it-could-not-be
+springBoot {
+    mainClass = 'com.gini.GRpcCoreApplication'
 }
