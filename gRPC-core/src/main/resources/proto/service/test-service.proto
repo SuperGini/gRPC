@@ -1,0 +1,21 @@
+syntax="proto3";
+
+package resources.proto;
+
+import "google/protobuf/empty.proto";
+import "model/person.proto"; //import from the top folder in this case resources
+
+//option java_package = "com.gini.service";
+option java_package = "com.gini.service";
+
+
+
+
+service PersonService {
+
+  // this is unary (request/response) we don't do any streaming here
+  rpc GetPerson(google.protobuf.Empty) returns (model.Person);
+
+
+
+}
