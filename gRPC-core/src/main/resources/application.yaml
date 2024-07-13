@@ -47,12 +47,6 @@ spring:
           plan_cache_max_size: 4096
 #        dialect: org.hibernate.dialect.MySQLDialect # it will be set as default
 
-
-
-
-
-
-
 grpc:
   server:
     port: 6565

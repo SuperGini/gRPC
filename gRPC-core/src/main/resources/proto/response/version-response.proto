@@ -1,0 +1,14 @@
+syntax="proto3";
+
+import "response/type-response.proto";
+
+option java_multiple_files = true;
+option java_package = "response";
+
+
+message VersionResponse {
+
+  response.TypeResponse type = 1;
+  int32 productionYear = 2;
+
+}

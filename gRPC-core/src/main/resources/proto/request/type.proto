@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package request;
+
+option java_multiple_files = true;
+option java_package = "request";
+
+enum Type {
+
+  COUPE = 0;
+  HATCHBACK = 1;
+  LIMOUSINE = 2;
+  MINIVAN = 3;
+  CABRIOLET = 4;
+  SEDAN = 5;
+  ROADSTER = 6;
+
+}
