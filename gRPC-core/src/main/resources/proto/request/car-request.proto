@@ -3,7 +3,7 @@ syntax = "proto3";
 
 package request;
 
-import "request/type.proto";
+import "request/VersionRequest.proto";
 import "request/manufacturer.proto";
 
 option java_multiple_files = true; //so it will not create Person as a inner class of PersonOuterClass
@@ -12,8 +12,8 @@ option java_package = "com.gini.request";  // in what package the class will be 
 message CarRequest {
 
   string model = 1;
-  request.Type type = 2;
   request.Manufacturer manufacturer = 3;
+  request.VersionRequest version = 4;
 
 
 }

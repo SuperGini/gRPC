@@ -1,12 +1,14 @@
 syntax="proto3";
 
+package request;
+
 import "request/type.proto";
 
 option java_multiple_files = true;
 option java_package = "com.gini.request";
 
 
-message Version {
+message VersionRequest {
 
   request.Type type = 1;
   int32 productionYear = 2;
