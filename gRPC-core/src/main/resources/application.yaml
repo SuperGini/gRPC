@@ -1,6 +1,11 @@
 spring:
   application:
     name: gRPC-core
+  datasource:
+    password:
+    username:
 grpc:
   server:
     port: 6565
+
+
