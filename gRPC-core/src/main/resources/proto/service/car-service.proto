@@ -1,0 +1,17 @@
+syntax="proto3";
+
+
+import "request/car-request.proto";
+import "response/car-response.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gini.services";
+
+service CarService {
+
+  //unary
+  rpc CreateCar(request.CarRequest) returns (response.CarResponse);
+
+
+}
+

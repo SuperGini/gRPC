@@ -3,7 +3,7 @@ syntax = "proto3";
 package request;
 
 option java_multiple_files = true;
-option java_package = "request";
+option java_package = "com.gini.request";
 
 enum Type {
 

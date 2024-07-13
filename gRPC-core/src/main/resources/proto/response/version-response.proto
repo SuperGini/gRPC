@@ -3,7 +3,7 @@ syntax="proto3";
 import "response/type-response.proto";
 
 option java_multiple_files = true;
-option java_package = "response";
+option java_package = "com.gini.response";
 
 
 message VersionResponse {
