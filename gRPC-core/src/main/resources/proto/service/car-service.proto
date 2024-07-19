@@ -3,6 +3,8 @@ syntax="proto3";
 
 import "request/car-request.proto";
 import "response/car-response.proto";
+import "request/get/car-id.proto";
+import "request/get/car-get-response.proto"; // the package must be the same at the package from the .prot file where we import the .proto file
 
 option java_multiple_files = true;
 option java_package = "com.gini.services";
@@ -11,6 +13,8 @@ service CarService {
 
   //unary
   rpc CreateCar(request.CarRequest) returns (response.CarResponse);
+
+  rpc GetCar(request.get.CarId) returns (request.get.CarGetResponse);
 
 
 }

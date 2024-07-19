@@ -1,8 +1,10 @@
 package com.gini.grpcservices;
 
-import com.gini.mapper.CarMapper;
+
 import com.gini.request.CarRequest;
 import com.gini.request.CarResponse;
+import com.gini.request.get.CarGetResponse;
+import com.gini.request.get.CarId;
 import com.gini.services.CarService;
 import com.gini.services.CarServiceGrpc;
 import io.grpc.stub.StreamObserver;
@@ -18,10 +20,15 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
     @Override
     public void createCar(CarRequest request, StreamObserver<CarResponse> responseObserver) {
 
-       var carResponse = carService.saveCar(request);
+        var carResponse = carService.saveCar(request);
 
-       responseObserver.onNext(carResponse);
-       responseObserver.onCompleted();
+        responseObserver.onNext(carResponse);
+        responseObserver.onCompleted();
+    }
 
+
+    @Override
+    public void getCar(CarId request, StreamObserver<CarGetResponse> responseObserver) {
+        super.getCar(request, responseObserver);
     }
 }

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 
-package request;
+package request; //we use this package for the import -> don't forget to add the package -> you will need it for the import
 
 import "request/VersionRequest.proto";
 import "request/manufacturer.proto";

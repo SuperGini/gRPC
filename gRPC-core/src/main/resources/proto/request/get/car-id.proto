@@ -1,0 +1,11 @@
+syntax="proto3";
+
+package request.get; //we use this package for the import
+
+option java_multiple_files = true;
+option java_package = "com.gini.request.get";
+
+
+message CarId {
+  string id = 1;
+}
