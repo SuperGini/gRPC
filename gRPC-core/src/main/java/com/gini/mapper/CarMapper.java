@@ -5,9 +5,11 @@ import com.gini.model.Manufacturer;
 import com.gini.model.Version;
 import com.gini.request.CarRequest;
 import com.gini.request.CarResponse;
+import com.gini.request.get.CarGetResponse;
 import com.gini.response.TypeResponse;
 import com.gini.response.VersionResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarMapper {
@@ -45,6 +47,29 @@ public class CarMapper {
                 .setManufacturer(car.getManufacturer().getManufacturerName())
                 .setVersion(version)
                 .build();
+    }
+
+    public static CarGetResponse mapTo(Car car) {
+
+        List<VersionResponse> versions = new ArrayList<>();
+
+        car.getCarVersions().stream()
+                .map(v ->
+                        VersionResponse
+                                .newBuilder()
+                                .setProductionYear(v.getProductionYear())
+                                .setType(TypeResponse.valueOf(v.getType().name()))
+                                .build()
+                )
+                .forEach(versions::add);
+
+        return CarGetResponse.newBuilder()
+                .setId(car.getId())
+                .setModel(car.getModel())
+                .setManufacturerName(car.getManufacturer().getManufacturerName())
+                .addAllVersions(versions)
+                .build();
+
     }
 
 }

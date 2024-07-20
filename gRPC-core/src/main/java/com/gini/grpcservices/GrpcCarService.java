@@ -29,6 +29,11 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
 
     @Override
     public void getCar(CarId request, StreamObserver<CarGetResponse> responseObserver) {
-        super.getCar(request, responseObserver);
+
+       var carResponse =  carService.getCar(request);
+
+       responseObserver.onNext(carResponse);
+       responseObserver.onCompleted();
+
     }
 }
