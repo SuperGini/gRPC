@@ -39,8 +39,7 @@ public class Car {
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Manufacturer manufacturer;
 
-    @JoinColumn(name = "var_Version_id")
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY, mappedBy = "car")
     private List<Version> carVersions;
 
 

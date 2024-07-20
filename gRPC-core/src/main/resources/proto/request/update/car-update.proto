@@ -1,0 +1,24 @@
+syntax ="proto3";
+
+
+package request.update;
+
+import "request/type.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gini.request.update";
+
+
+
+message CarUpdateVersion {
+
+  int32 productionYear = 1;
+  request.Type type = 2;
+  CarIdUpdate carId = 3;
+
+}
+
+message CarIdUpdate {
+  string id = 1;
+}
+

@@ -5,6 +5,8 @@ import "request/car-request.proto";
 import "response/car-response.proto";
 import "request/get/car-id.proto";
 import "request/get/car-get-response.proto"; // the package must be the same at the package from the .prot file where we import the .proto file
+import "request/update/car-update.proto";
+import "google/protobuf/empty.proto";
 
 option java_multiple_files = true;
 option java_package = "com.gini.services";
@@ -15,6 +17,8 @@ service CarService {
   rpc CreateCar(request.CarRequest) returns (response.CarResponse);
 
   rpc GetCar(request.get.CarId) returns (request.get.CarGetResponse);
+
+  rpc UpdateCarVersion (request.update.CarUpdateVersion) returns (google.protobuf.Empty); //we don't return nothing
 
 
 }

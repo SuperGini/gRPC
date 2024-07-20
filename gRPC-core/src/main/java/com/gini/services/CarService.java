@@ -2,15 +2,23 @@ package com.gini.services;
 
 import com.gini.exceptions.CarNotFoundException;
 import com.gini.mapper.CarMapper;
+import com.gini.model.Version;
+import com.gini.model.util.Type;
 import com.gini.repository.CarRepository;
 import com.gini.repository.CustomCarRepository;
+import com.gini.repository.VersionRepository;
 import com.gini.request.CarRequest;
 import com.gini.request.CarResponse;
 import com.gini.request.get.CarGetResponse;
 import com.gini.request.get.CarId;
+import com.gini.request.update.CarIdUpdate;
+import com.gini.request.update.CarUpdateVersion;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,7 +28,9 @@ public class CarService {
 
     private final CarRepository carRepository;
     private final CustomCarRepository customCarRepository;
+    private final VersionRepository versionRepository;
 
+    @Transactional
     public CarResponse saveCar(CarRequest carRequest) {
 
         var car  = CarMapper.mapFrom(carRequest);
@@ -30,7 +40,7 @@ public class CarService {
 
     }
 
-
+    @Transactional
     public CarGetResponse getCar(CarId carId) {
 
        var car = customCarRepository.findById(carId.getId());
@@ -42,6 +52,20 @@ public class CarService {
     }
 
 
+    @Transactional
+    public void updateCarVersion(CarUpdateVersion carUpdateVersion) {
+
+        var car = carRepository.getReferenceById(carUpdateVersion.getCarId().getId());
+
+        var version = Version.builder()
+                .type(Type.valueOf(carUpdateVersion.getType().name()))
+                .productionYear(carUpdateVersion.getProductionYear())
+                .car(car)
+                .build();
+
+        versionRepository.save(version);
+
+    }
 
 
 }
