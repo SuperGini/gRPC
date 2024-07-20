@@ -1,6 +1,7 @@
 package com.gini.grpcservices;
 
 
+import com.gini.exceptions.CarNotFoundException;
 import com.gini.request.CarRequest;
 import com.gini.request.CarResponse;
 import com.gini.request.get.CarGetResponse;
@@ -12,6 +13,8 @@ import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @RequiredArgsConstructor
 @GrpcService
@@ -30,18 +33,24 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
 
     @Override
     public void getCar(CarId request, StreamObserver<CarGetResponse> responseObserver) {
-       var carResponse =  carService.getCar(request);
+        var carResponse = carService.getCar(request);
 
-       responseObserver.onNext(carResponse);
-       responseObserver.onCompleted();
+        responseObserver.onNext(carResponse);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void updateCarVersion(CarUpdateVersion request, StreamObserver<Empty> responseObserver) {
 
-        carService.updateCarVersion(request);
-        responseObserver.onNext(Empty.getDefaultInstance()); // we don't return anything this is why we send an empty instance
-        responseObserver.onCompleted();
+
+        try {
+            carService.updateCarVersion(request);
+            responseObserver.onNext(Empty.getDefaultInstance()); // we don't return anything this is why we send an empty instance
+            responseObserver.onCompleted();
+        } catch (DataIntegrityViolationException e) {
+            throw new CarNotFoundException("car id not found", e);
+        }
+
 
     }
 }

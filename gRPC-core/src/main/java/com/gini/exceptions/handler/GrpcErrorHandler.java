@@ -5,6 +5,9 @@ import io.grpc.Status;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.advice.GrpcAdvice;
 import net.devh.boot.grpc.server.advice.GrpcExceptionHandler;
+import org.springframework.dao.DataIntegrityViolationException;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @Slf4j
 @GrpcAdvice
@@ -19,5 +22,11 @@ public class GrpcErrorHandler {
 
     }
 
+
+    @GrpcExceptionHandler(Exception.class)
+    public Status handleException(Exception ex) {
+        log.error("Error: ", ex);
+        return Status.INTERNAL.withDescription("shit happens!!!! :D");
+    }
 
 }
