@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class CustomCarRepository {
@@ -31,5 +32,15 @@ public class CustomCarRepository {
 
     }
 
+    public List<Car> findAllCars() {
+
+        EntityGraph<Car> carGraph = entityManager.createEntityGraph(Car.class);
+        carGraph.addAttributeNodes("manufacturer");
+        carGraph.addAttributeNodes("carVersions");
+
+       return entityManager.createQuery("SELECT c FROM Car c", Car.class)
+                .setHint("javax.persistence.loadgraph", carGraph)
+                .getResultList();
+    }
 
 }

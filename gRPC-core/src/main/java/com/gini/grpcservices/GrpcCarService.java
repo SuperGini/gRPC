@@ -9,12 +9,14 @@ import com.gini.request.get.CarId;
 import com.gini.request.update.CarUpdateVersion;
 import com.gini.services.CarService;
 import com.gini.services.CarServiceGrpc;
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
+
+import java.time.Duration;
 
 @RequiredArgsConstructor
 @GrpcService
@@ -42,7 +44,6 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
     @Override
     public void updateCarVersion(CarUpdateVersion request, StreamObserver<Empty> responseObserver) {
 
-
         try {
             carService.updateCarVersion(request);
             responseObserver.onNext(Empty.getDefaultInstance()); // we don't return anything this is why we send an empty instance
@@ -50,7 +51,18 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
         } catch (DataIntegrityViolationException e) {
             throw new CarNotFoundException("car id not found", e);
         }
+    }
 
 
+    @Override
+    public void getAllCarsAsStream(Empty request, StreamObserver<CarGetResponse> responseObserver) {
+
+        var carList = carService.getAllCars();
+
+        carList.forEach(car -> { //to simulate streaming
+            Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(2L));
+            responseObserver.onNext(car);
+        });
+        responseObserver.onCompleted();
     }
 }

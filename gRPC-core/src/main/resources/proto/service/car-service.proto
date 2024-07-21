@@ -20,6 +20,8 @@ service CarService {
 
   rpc UpdateCarVersion (request.update.CarUpdateVersion) returns (google.protobuf.Empty); //we don't return nothing
 
+  //server stream
+  rpc getAllCarsAsStream(google.protobuf.Empty) returns (stream request.get.CarGetResponse);
 
 }
 

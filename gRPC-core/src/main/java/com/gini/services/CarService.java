@@ -11,8 +11,9 @@ import com.gini.request.CarRequest;
 import com.gini.request.CarResponse;
 import com.gini.request.get.CarGetResponse;
 import com.gini.request.get.CarId;
-import com.gini.request.update.CarIdUpdate;
 import com.gini.request.update.CarUpdateVersion;
+import com.gini.response.TypeResponse;
+import com.gini.response.VersionResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class CarService {
     @Transactional
     public CarResponse saveCar(CarRequest carRequest) {
 
-        var car  = CarMapper.mapFrom(carRequest);
+        var car = CarMapper.mapFrom(carRequest);
         var carDb = carRepository.save(car);
 
         return CarMapper.mapTo(carDb, carRequest);
@@ -43,9 +44,9 @@ public class CarService {
     @Transactional
     public CarGetResponse getCar(CarId carId) {
 
-       var car = customCarRepository.findById(carId.getId());
+        var car = customCarRepository.findById(carId.getId());
 
-       return Optional.ofNullable(car)
+        return Optional.ofNullable(car)
                 .map(CarMapper::mapTo)
                 .orElseThrow(() -> new CarNotFoundException("car id not found"));
 
@@ -64,7 +65,46 @@ public class CarService {
                 .build();
 
         versionRepository.save(version);
+    }
 
+
+    public List<CarGetResponse> getAllCars() {
+
+        var carList = customCarRepository.findAllCars();
+
+        List<CarGetResponse> cars = new ArrayList<>();
+
+
+        carList.stream()
+                .map(CarMapper::mapTo)
+                .forEach(cars::add);
+
+//        carList.stream()
+//                .map(x -> {
+//
+//                    var versions = new ArrayList<VersionResponse>();
+//
+//                    x.getCarVersions().stream()
+//                            .map(y ->
+//                                    VersionResponse.newBuilder()
+//                                            .setType(TypeResponse.valueOf(y.getType().name()))
+//                                            .setProductionYear(y.getProductionYear())
+//                                            .build()
+//                            )
+//                            .forEach(versions::add);
+//
+//
+//                    return CarGetResponse.newBuilder()
+//                            .setId(x.getId())
+//                            .setManufacturerName(x.getManufacturer().getManufacturerName())
+//                            .setModel(x.getModel())
+//                            .addAllVersions(versions)
+//                            .build();
+//                })
+//
+//                .forEach(cars::add);
+
+        return cars;
     }
 
 
