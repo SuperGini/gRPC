@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gRPC-api
+
+
+grpc:
+  client:
+    gRPC-core:
+      address: static://localhost:6565
+      negotiation-type: PLAINTEXT
