@@ -50,5 +50,10 @@ spring:
 grpc:
   server:
     port: 6565
+    security:
+      enabled: true
+      certificate-chain: file:src/main/resources/certificate/server.crt
+      private-key: file:src/main/resources/certificate/server.key
+
 
 

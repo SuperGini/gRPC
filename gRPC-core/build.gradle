@@ -28,7 +28,7 @@ dependencies {
 
     implementation 'net.devh:grpc-spring-boot-starter:3.1.0.RELEASE'         //gRPC dependency
     implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE' //server dependency
-    implementation 'com.google.protobuf:protobuf-java:4.27.2'
+    implementation 'com.google.protobuf:protobuf-java:4.27.2' //used to generate java classes from .proto files
 //    implementation 'io.grpc:grpc-netty:1.65.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.mysql:mysql-connector-j'
