@@ -2,9 +2,14 @@ spring:
   application:
     name: gRPC-api
 
-
+#because the certificate is not signed by a thrusted (CA) authority I had to add the certificate here so I can make the TLS work.
+#using POSTMAN works without adding the certificate
+#addint the server certificate here is needed because the client app checks if the certificate was signed by an CA authority
 grpc:
   client:
     gRPC-core:
       address: static://localhost:6565
-      negotiation-type: PLAINTEXT
+      negotiation-type: TLS
+      security:
+        trust-cert-collection: file:src/main/resources/certificate/server.crt
+
