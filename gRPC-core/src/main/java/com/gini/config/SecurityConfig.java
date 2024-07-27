@@ -11,8 +11,13 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.oauth2.jwt.JwtValidators;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 
@@ -47,7 +52,15 @@ public class SecurityConfig {
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        return JwtDecoders.fromOidcIssuerLocation(authServerUrl);
+        NimbusJwtDecoder jwtDecoder =
+                JwtDecoders.fromOidcIssuerLocation(authServerUrl);
+
+        var withIssuer = JwtValidators.createDefaultWithIssuer(authServerUrl);
+        var withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, new AudienceValidator());
+
+        jwtDecoder.setJwtValidator(withAudience);
+
+        return jwtDecoder;
 
     }
 

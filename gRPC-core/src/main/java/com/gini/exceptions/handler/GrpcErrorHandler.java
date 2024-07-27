@@ -6,6 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.advice.GrpcAdvice;
 import net.devh.boot.grpc.server.advice.GrpcExceptionHandler;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.oauth2.jwt.JwtValidationException;
+import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -21,7 +24,6 @@ public class GrpcErrorHandler {
                 .augmentDescription("bla bla bla ");
 
     }
-
 
     @GrpcExceptionHandler(Exception.class)
     public Status handleException(Exception ex) {
