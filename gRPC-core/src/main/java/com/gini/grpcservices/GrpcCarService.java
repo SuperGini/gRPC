@@ -15,6 +15,8 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.time.Duration;
 
@@ -25,6 +27,7 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
     private final CarService carService;
 
     @Override
+    @PreAuthorize("hasAuthority('SCOPE_write')")
     public void createCar(CarRequest request, StreamObserver<CarResponse> responseObserver) {
         var carResponse = carService.saveCar(request);
 
@@ -34,6 +37,7 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
 
 
     @Override
+    @PreAuthorize("hasAuthority('SCOPE_read')")
     public void getCar(CarId request, StreamObserver<CarGetResponse> responseObserver) {
         var carResponse = carService.getCar(request);
 
@@ -42,6 +46,7 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
     }
 
     @Override
+    @PreAuthorize("hasAuthority('SCOPE_write')")
     public void updateCarVersion(CarUpdateVersion request, StreamObserver<Empty> responseObserver) {
 
         try {
@@ -55,6 +60,7 @@ public class GrpcCarService extends CarServiceGrpc.CarServiceImplBase {
 
 
     @Override
+    @PreAuthorize("hasAuthority('SCOPE_read')")
     public void getAllCarsAsStream(Empty request, StreamObserver<CarGetResponse> responseObserver) {
 
         var carList = carService.getAllCars();

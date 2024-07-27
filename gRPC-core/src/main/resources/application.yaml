@@ -54,6 +54,10 @@ grpc:
       enabled: true
       certificate-chain: file:src/main/resources/certificate/server.crt
       private-key: file:src/main/resources/certificate/server.key
+#      client-auth: REQUIRE
 
+
+auth-server:
+  url:
 
 
