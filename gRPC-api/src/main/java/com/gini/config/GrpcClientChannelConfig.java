@@ -11,13 +11,14 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class GrpcClientChannelConfig {
 
-
+    //we can add here interceptors
     @Bean  //https://grpc.io/docs/guides/keepalive/
     public GrpcChannelConfigurer keepAliveClientConfigurer() {
         return (channelBuilder, name) ->
                 channelBuilder
-                        .keepAliveTime(30, TimeUnit.SECONDS) //used for streaming, does not have a big impact on unary
-                        .keepAliveTimeout(5, TimeUnit.SECONDS); //used for streaming, does not have a big impact on unary
+                        .keepAliveTime(30, TimeUnit.SECONDS) //used for streaming, does not have a big impact on unary -> how often to send the ping
+                        .keepAliveTimeout(5, TimeUnit.SECONDS); //used for streaming, does not have a big impact on unary -> timeout for the ping response
+
     }
 
 }

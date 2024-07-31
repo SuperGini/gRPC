@@ -55,9 +55,22 @@ grpc:
       certificate-chain: file:src/main/resources/certificate/server.crt
       private-key: file:src/main/resources/certificate/server.key
 #      client-auth: REQUIRE
-
+#net.devh.boot.grpc.server.security
 
 auth-server:
   url:
+
+logging:
+  level:
+     net:
+       devh:
+         boot:
+           grpc:
+             server:
+               security: DEBUG
+
+
+
+
 
 

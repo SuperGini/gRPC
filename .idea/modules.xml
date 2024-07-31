@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/gRPC.iml" filepath="$PROJECT_DIR$/.idea/gRPC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gRPC-core.iml" filepath="$PROJECT_DIR$/.idea/modules/gRPC-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gRPC-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gRPC-core.main.iml" />
     </modules>
   </component>

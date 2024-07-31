@@ -1,2 +1,4 @@
 .idea
 gRPC-core/src/main/resources/application-local.yaml
+gRPC-api/src/main/resources/application-local.yaml
+

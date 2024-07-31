@@ -13,3 +13,9 @@ grpc:
       security:
         trust-cert-collection: file:src/main/resources/certificate/server.crt
 
+auth0:
+  clientId:
+  clientSecret:
+  tokenUri:
+  audience:
+  clientRegistrationId:
