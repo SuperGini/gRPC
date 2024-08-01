@@ -28,9 +28,14 @@ public class CarController {
 
 
     @GetMapping("/car/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public CarResponse getCar(@PathVariable String id) {
         return carService.getCar(id);
+    }
 
+    @GetMapping("/cars")
+    public void getAllCars() {
+        carService.getAllCars();
     }
 
 

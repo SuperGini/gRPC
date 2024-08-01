@@ -36,7 +36,7 @@ public class SecurityConfig {
 
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
-        ClientRegistration c1 = ClientRegistration.withRegistrationId("auth0")
+        ClientRegistration c1 = ClientRegistration.withRegistrationId(aut0Properties.clientRegistrationId())
                 .clientId(aut0Properties.clientId())
                 .clientSecret(aut0Properties.clientSecret())
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
@@ -49,8 +49,8 @@ public class SecurityConfig {
     @Bean
     public OAuth2AuthorizedClientManager authorizedClientManager(
             ClientRegistrationRepository clientRegistrationRepository,
-            OAuth2AuthorizedClientRepository authorizedClientRepository, OAuth2AuthorizedClientProvider authorizedClientProvider) {
-
+            OAuth2AuthorizedClientRepository authorizedClientRepository,
+            OAuth2AuthorizedClientProvider authorizedClientProvider) {
 
         DefaultOAuth2AuthorizedClientManager authorizedClientManager =
                 new DefaultOAuth2AuthorizedClientManager(
@@ -66,6 +66,7 @@ public class SecurityConfig {
 
     @Bean
     public OAuth2AuthorizedClientProvider clientCredentialsProvider() {
+
         var requestEntityConverter = new OAuth2ClientCredentialsGrantRequestEntityConverter();
         requestEntityConverter.addParametersConverter(grantRequest -> {
             var parameters = new LinkedMultiValueMap<String, String>();
