@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package response; //we use this package for the import -> don't forget to add the package -> you will need it for the import
+
+option java_multiple_files = true;
+option java_package = "com.gini.response";
+
+enum TypeResponse {
+
+  COUPE = 0;
+  HATCHBACK = 1;
+  LIMOUSINE = 2;
+  MINIVAN = 3;
+  CABRIOLET = 4;
+  SEDAN = 5;
+  ROADSTER = 6;
+
+}

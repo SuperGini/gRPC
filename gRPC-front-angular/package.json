@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "generate-ts": "npx protoc --ts_out ./src/generated/proto --proto_path proto proto/request/get/*.proto proto/request/*.proto proto/request/update/*.proto proto/response/*.proto proto/service/*.proto",
+    "start": " npm run generate-ts && ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -18,6 +19,8 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@protobuf-ts/plugin": "^2.9.4",
+    "@protobuf-ts/runtime": "^2.9.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

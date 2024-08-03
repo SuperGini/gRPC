@@ -1,0 +1,21 @@
+syntax="proto3";
+
+package response; //we use this package for the import -> don't forget to add the package -> you will need it for the import
+
+option java_multiple_files = true;
+option java_package = "com.gini.request";
+
+import "response/type-response.proto";
+import "response/versionResponse.proto";
+
+
+message CarResponse{
+
+  string id = 1;
+  string model = 2;
+  string manufacturer = 3;
+  response.VersionResponse version = 4;
+
+
+
+}

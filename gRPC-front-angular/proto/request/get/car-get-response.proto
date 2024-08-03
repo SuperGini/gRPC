@@ -1,0 +1,16 @@
+syntax="proto3";
+
+package request.get; //we use this package for the import -> don't forget to add the package -> you will need it for the import
+
+import "response/versionResponse.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gini.request.get";
+
+message CarGetResponse {
+  string id =1;
+  string model = 2;
+  string manufacturerName = 3;
+  repeated response.VersionResponse versions = 4;
+
+}

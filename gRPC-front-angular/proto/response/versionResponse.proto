@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package response;
+
+import "response/type-response.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gini.response";
+
+
+message VersionResponse {
+
+  response.TypeResponse type = 1;
+  int32 productionYear = 2;
+
+}

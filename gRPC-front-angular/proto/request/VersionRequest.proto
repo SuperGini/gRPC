@@ -1,0 +1,16 @@
+syntax="proto3";
+
+package request; //we use this package for the import -> don't forget to add the package -> you will need it for the import
+
+import "request/type.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gini.request";
+
+
+message VersionRequest {
+
+  request.Type type = 1;
+  int32 productionYear = 2;
+
+}
