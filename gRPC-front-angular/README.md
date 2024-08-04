@@ -1,8 +1,10 @@
 ## Generate ts file from .proto files
 
-add dependency: https://github.com/timostamm/protobuf-ts
+add dependency: https://github.com/timostamm/protobuf-ts https://github.com/timostamm/protobuf-ts/blob/main/MANUAL.md#generated-code
 ```
-npm install @protobuf-ts/plugin 
+npm install @protobuf-ts/plugin
+npm install @protobuf-ts/runtime  -> The generated code requires a runtime package
+
 ```
 ### in the package.json file in the script part add: 
 
