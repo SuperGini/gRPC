@@ -6,9 +6,26 @@
     box-sizing: border-box;
 }
 
+:root {
+    --white-color: #fdfefe;
+    --orange-color: #f94a0b;
+    --orange-dark: #e0430a;
+
+}
+
 html {
     font-size: 62.5%;
 }
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+/*VERY IMPORTANT
+
+https://stackoverflow.com/questions/78551407/images-are-not-displayed-in-angular-18
+*/
+
 
 /*
 format("truetype") -> indicates that the font file is in TrueType Font format.
