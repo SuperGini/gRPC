@@ -1,5 +1,5 @@
 import {Component, inject} from "@angular/core";
-import {CarService} from "../services/carservice";
+import {CarService} from "../services/car.service";
 
 @Component({
     selector: "test-component",
