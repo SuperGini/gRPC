@@ -1,0 +1,28 @@
+.output-search-container {
+    display: flex;
+}
+
+.car-info {
+    font-size: 1.3rem;
+    font-family: "Roboto Medium", sans-serif;
+    margin-left: 1rem;
+}
+
+.car-versions-container {
+    padding-left: 2rem;
+    font-size: 1.3rem;
+    font-family: "Roboto Medium", sans-serif;
+}
+
+.version-row {
+    margin-bottom: 2rem;
+}
+
+.version-row p {
+    margin-bottom: 0.5rem;
+}
+
+
+
+
+

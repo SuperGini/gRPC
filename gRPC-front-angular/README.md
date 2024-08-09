@@ -17,3 +17,8 @@ put all the proto files in the proto directory
 the code above will read all the .proto files from the proto directory where the .proto files are and will generate the
 ts files in ./src/generated/proto  ----> don't forget to create first the generated/proto folders first before generating
 the ts files.
+
+### install angular material to handle the svg icons
+```
+npm install @angular/material
+```

@@ -1,0 +1,67 @@
+.search-bar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.inner-search-bar-container {
+    position: relative;
+    max-width: 40rem;
+    width: 100%;
+}
+
+.search-bar {
+    max-width: 40rem;
+    width: 100%;
+    height: 4rem;
+    border-radius: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: none;
+    font-size: 1.5rem;
+    padding-left: 4.5rem;
+}
+
+.search-bar:focus {
+    outline: none;
+}
+
+.search-bar:hover {
+    box-shadow: rgb(229, 57, 53) 0px 1px 4px, rgb(229, 57, 53) 0px 0px 0px 3px;
+    transition: 0.1s ease-in-out;
+}
+
+mat-icon {
+    position: absolute;
+    left: 1.5rem;
+    top: 1rem;
+}
+
+.output-search-container {
+    display: flex;
+}
+
+.car-info {
+    font-size: 1.3rem;
+    font-family: "Roboto Medium", sans-serif;
+    margin-left: 1rem;
+}
+
+.car-versions-container {
+    padding-left: 2rem;
+    font-size: 1.3rem;
+    font-family: "Roboto Medium", sans-serif;
+}
+
+.version-row {
+    margin-bottom: 2rem;
+}
+
+.version-row p {
+    margin-bottom: 0.5rem;
+}
+
+
+
+
+

@@ -10,6 +10,7 @@
     --white-color: #fdfefe;
     --orange-color: #f94a0b;
     --orange-dark: #e0430a;
+    --white-gray: #d7dbdd;
 
 }
 
@@ -20,6 +21,7 @@ html {
 body {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 /*VERY IMPORTANT
 
