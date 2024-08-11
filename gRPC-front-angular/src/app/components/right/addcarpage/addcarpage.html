@@ -1,22 +1,25 @@
-<div class="fields-container">
-    <div class="field">
-        <label>Manufacturer</label>
-        <input type="text">
-    </div>
-    <div class="field">
-        <label>Model</label>
-        <input type="text">
-    </div>
-    <div class="field">
-        <label>Type</label>
-        <input type="text">
-    </div>
-    <div class="field">
-        <label>Production year</label>
-        <input type="text">
-    </div>
+<form [formGroup]="form" >
+    <div class="fields-container">
+        <div class="field">
+            <label>Manufacturer</label>
+            <input type="text" formControlName="manufacturer">
+        </div>
+        <div class="field">
+            <label>Model</label>
+            <input type="text" formControlName="model">
+        </div>
+        <div class="field">
+            <label>Type</label>
+            <input type="text" formControlName="type">
+        </div>
+        <div class="field">
+            <label>Production year</label>
+            <input type="text" formControlName="productionYear">
+        </div>
 
-    <button class="btn">Add car</button>
-</div>
+        <button class="btn" (click)="addCar()">Add car</button>
+    </div>
+</form>
+
 
 

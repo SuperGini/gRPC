@@ -1,23 +1,21 @@
-
 <div class="output-search-container">
-    <div class="car-info">
-        <div class="car-row">
-            <p>Manufacturer: Ford</p>
-            <p>Model: Focus</p>
-        </div>
-    </div>
-    <div class="car-versions-container">
-        <div class="version-row">
-            <p>type: Hatchback</p>
-            <p>production year: 2031</p>
-        </div>
-        <div class="version-row">
-            <p>type: Hatchback</p>
-            <p>production year: 2031</p>
-        </div>
-        <div class="version-row">
-            <p>type: Coupe</p>
-            <p>production year: 2031</p>
-        </div>
-    </div>
+    @if (cars()) {
+        @for (car of cars(); track car.id) {
+            <div class="car-info">
+                <div class="car-row">
+                    <p>Manufacturer: {{ car.manufacturerName }}</p>
+                    <p>Model: {{ car.model }}</p>
+                </div>
+            </div>
+            <div class="car-versions-container">
+                @for (version of car.versions; track version.productionYear) {
+                    <div class="version-row">
+                        <p>type: {{ version.type }}</p>
+                        <p>production year: {{ version.productionYear }}</p>
+                    </div>
+                }
+            </div>
+        }
+    }
+
 </div>
