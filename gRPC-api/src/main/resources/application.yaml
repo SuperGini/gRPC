@@ -6,6 +6,12 @@ spring:
 #using POSTMAN works without adding the certificate
 #addint the server certificate here is needed because the client app checks if the certificate was signed by an CA authority
 grpc:
+  server:
+    port: 6767
+#    security:
+#      enabled: true
+#      certificate-chain: file:src/main/resources/certificate/server.crt
+#      private-key: file:src/main/resources/certificate/server.key
   client:
     gRPC-core:
       address: static://localhost:6565
@@ -18,4 +24,5 @@ auth0:
   clientSecret:
   tokenUri:
   audience:
+
   clientRegistrationId:

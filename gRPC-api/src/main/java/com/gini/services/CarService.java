@@ -46,13 +46,15 @@ public class CarService {
                         .build())
                 .build();
 
-        var carResponse = carServiceStub.withDeadlineAfter(5, TimeUnit.SECONDS).createCar(carRequest);
+        var carResponse = carServiceStub.withDeadlineAfter(10, TimeUnit.SECONDS).createCar(carRequest);
 
         return CarMapper.generateCarResponse(carResponse);
 
     }
 
-    public void getAllCars() {
+    public List<CarResponse> getAllCars() {
+
+        var carList = new ArrayList<CarResponse>();
 
         var result = carServiceStub.getAllCarsAsStream(Empty.getDefaultInstance());
 
@@ -79,11 +81,14 @@ public class CarService {
                     x.getManufacturerName(),
                     t
             );
+
+            carList.add(c);
+
             System.out.println(c);
 
         });
 
-
+        return carList;
     }
 
 }
