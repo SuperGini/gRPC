@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     private final Auth0ConfigProperties aut0Properties;
     private final CorsConfig corsConfig;
-
+//------------------------ resource server config-----------------------------------------------------
     @Bean
     public SecurityFilterChain configure(HttpSecurity http, JwtDecoder decoder) throws Exception {
 
@@ -70,8 +70,11 @@ public class SecurityConfig {
 //        jwtDecoder.setJwtValidator(withAudience);
 
         return jwtDecoder;
-
     }
+
+//-------------------------------------------------------------------------------------------------------------------
+
+//--------------------------client config----------------------------------------------------------------------------
 
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
@@ -123,5 +126,6 @@ public class SecurityConfig {
 
         return authorizedClientProvider;
     }
+//----------------------------------------------------------------------------------------------------------------------
 
 }
