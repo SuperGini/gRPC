@@ -5,6 +5,7 @@ import {Home} from "./components/home/home";
 import {GetCarPage} from "./components/right/getcarpage/get.car.page";
 import {AddCarPage} from "./components/right/addcarpage/add.car.page";
 import {AllCarPage} from "./components/right/allcarpage/all.car.page";
+import {UpdateCarPage} from "./components/right/updatecarpage/update-car-page";
 
 export const routes: Routes = [
 
@@ -40,9 +41,13 @@ export const routes: Routes = [
                 path: 'allcars',
                 component: AllCarPage,
                 pathMatch: "full"
+            },
+            {
+                path: 'updatecar',
+                component: UpdateCarPage,
+                pathMatch: "full"
             }
         ]
-
     }
 
 

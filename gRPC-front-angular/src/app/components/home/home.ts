@@ -1,6 +1,7 @@
-import {Component} from "@angular/core";
-import {RouterOutlet} from "@angular/router";
+import {Component, inject, OnInit, signal} from "@angular/core";
+import {Router, RouterOutlet} from "@angular/router";
 import {MatIcon} from "@angular/material/icon";
+import {NgClass} from "@angular/common";
 
 @Component({
     selector: "home-componenet",
@@ -9,9 +10,50 @@ import {MatIcon} from "@angular/material/icon";
     standalone: true,
     imports: [
         RouterOutlet,
-        MatIcon
+        MatIcon,
+        NgClass
     ]
 })
-export class Home {
+export class Home implements OnInit{
+
+    private readonly router = inject(Router);
+    readonly activePage = signal<Pages>(null);
+
+    ngOnInit(): void {
+        this.activePage.set(Pages.HOME)
+    }
+
+
+    toAddCarPage() {
+        this.router.navigate(["home/addcar"]);
+        this.activePage.set(Pages.ADDCAR)
+
+    }
+
+    toGetCarPage(){
+        this.router.navigate(["home/car"]);
+        this.activePage.set(Pages.GETCAR)
+    }
+
+    toAllCarsPage() {
+        this.router.navigate(["home/allcars"]);
+        this.activePage.set(Pages.GETALLCARS);
+    }
+
+    toUpdateCarPage() {
+        this.router.navigate(["home/updatecar"]);
+        this.activePage.set(Pages.UPDATECAR);
+    }
+
+
+
+}
+
+enum Pages {
+    ADDCAR = 'addCar',
+    GETCAR= 'getCar',
+    GETALLCARS = 'getAllCars',
+    UPDATECAR = 'updateCar',
+    HOME = 'home'
 
 }

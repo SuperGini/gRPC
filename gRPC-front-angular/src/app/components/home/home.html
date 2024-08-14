@@ -11,15 +11,15 @@
     <div class="lower-container">
         <div class="left-container">
             <div class="text">
-                <mat-icon svgIcon="home"></mat-icon>
-                <p>Car API</p>
+                <mat-icon class="activex" [ngClass]="{activex: activePage() === 'home'}" svgIcon="home"></mat-icon>
+                <p [ngClass]="{activex: activePage() === 'home'}"  >Car API</p>
             </div>
 
             <div class="car-container">
-                <button class="add-car btn">Add Car</button>
-                <button class="car-search btn">Car Search</button>
-                <button class="get-all-cars btn">All Cars</button>
-                <button class="update-car btn">Update Car</button>
+                <button class="add-car btn" [ngClass]="{'active': activePage() === 'addCar'}" (click)=toAddCarPage()>Add Car</button>
+                <button class="car-search btn" [ngClass]="{active: activePage() === 'getCar'}" (click)="toGetCarPage()">Car Search</button>
+                <button class="get-all-cars btn" [ngClass]="{active: activePage() === 'getAllCars'}" (click)="toAllCarsPage()">All Cars</button>
+                <button class="update-car btn" [ngClass]="{active: activePage() === 'updateCar'}" (click)="toUpdateCarPage()">Update Car</button>
             </div>
         </div>
         <div class="right-container">
